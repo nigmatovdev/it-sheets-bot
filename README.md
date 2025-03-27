@@ -34,20 +34,28 @@ cd it-bot
 pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the project root with the following variables:
+3. Set up environment variables:
 
-```env
-BOT_TOKEN=your_telegram_bot_token
-GROUP_CHAT_ID=your_telegram_group_chat_id
-SPREADSHEET_ID=your_google_sheets_id
-GOOGLE_SHEETS_CREDENTIALS_FILE=path_to_your_credentials.json
-```
+   - Copy `.env.example` to `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   - Edit `.env` with your actual values:
+
+   ```env
+   BOT_TOKEN=your_telegram_bot_token
+   GROUP_CHAT_ID=your_telegram_group_chat_id
+   SPREADSHEET_ID=your_google_sheets_id
+   GOOGLE_SHEETS_CREDENTIALS_FILE=credentials.json
+   ```
 
 4. Set up Google Sheets:
    - Create a new Google Cloud Project
    - Enable Google Sheets API
    - Create service account credentials
-   - Download the credentials JSON file
+   - Download the credentials JSON file as `credentials.json`
    - Share your Google Sheet with the service account email
 
 ## Project Structure
@@ -59,8 +67,31 @@ it-bot/
 ├── database.py         # Database operations
 ├── keyboards.py        # Keyboard layouts
 ├── requirements.txt    # Python dependencies
-└── .env               # Environment variables
+├── .env.example       # Example environment variables
+└── .gitignore         # Git ignore rules
 ```
+
+## Security Notes
+
+1. Never commit sensitive files:
+
+   - `.env` file
+   - `credentials.json`
+   - Any files containing API keys or secrets
+
+2. Keep your credentials secure:
+
+   - Store `.env` and `credentials.json` in a secure location
+   - Use different credentials for development and production
+   - Regularly rotate your API keys and tokens
+
+3. When deploying:
+   - Create new `.env` file on the server
+   - Upload `credentials.json` securely
+   - Set proper file permissions:
+     ```bash
+     chmod 600 .env credentials.json
+     ```
 
 ## Usage
 
@@ -183,6 +214,12 @@ GOOGLE_SHEETS_CREDENTIALS_FILE=credentials.json
 ```bash
 # From your local machine
 scp path/to/your/credentials.json root@your_server_ip:/opt/it-bot/credentials.json
+```
+
+4. Set proper permissions:
+
+```bash
+chmod 600 .env credentials.json
 ```
 
 ### 3. Systemd Service Setup
