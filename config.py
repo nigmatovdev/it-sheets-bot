@@ -15,11 +15,11 @@ GOOGLE_SHEETS_CREDENTIALS_FILE = os.getenv('GOOGLE_SHEETS_CREDENTIALS_FILE')
 
 # Predefined topics
 TOPICS = [
-    "Hardware Issue",
-    "Software Issue",
-    "Network Issue",
-    "Access Request",
-    "Other"
+    "Internet",
+    "Chiroq",
+    "Konditsioner",
+    "Printer",
+    "Boshqa"
 ]
 
 # Sheet ranges
